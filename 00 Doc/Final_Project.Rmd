@@ -59,5 +59,13 @@ This bargraph joins data from 2 of our datasets, USA_All_Healthcare.csv and heal
 
 ![](../03 Visualizations/Barchart_Calc.png)
 
+Here is the Shiny link: https://traj30.shinyapps.io/graph3/
+![](../02 Shiny/graph3.png)
+
+
+#**Graph 5**
+This scatter joins all 3 of our datasets: Poverty.csv, USA_All_States.csv, and healthcare.csv and shows the how the percentage of poverty as a function of percentage of people insured per state. Here we see a general trend that explains that as percentage of people insured per state increases, the percentage of poverty decreases. In other words, these two variables are negatively correlated.
+
+![](../03 Visualizations/Scatter.png)
 
 
