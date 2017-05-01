@@ -55,7 +55,7 @@ Here is the Shiny link: https://traj30.shinyapps.io/graph3/
 ![](../02 Shiny/graph3.png)
 
 #**Graph 4**
-This bargraph joins data from 2 of our datasets, USA_All_Healthcare.csv and healthcare.csv to show the percentage of females insured per state versus the percentage of males insured per state. More specifically, rather than showing the actual percentage of each gender, the visual shows a state's female and male insured percentage, and compares it to the national average of each gender's insured percentage.
+This bargraph joins data from 2 of our datasets, USA_All_Healthcare.csv and healthcare.csv to show the percentage of females insured per state versus the percentage of males insured per state. More specifically, rather than showing the actual percentage of each gender, the visual compares each state's female and male insured percentage to the national average of each gender's insured percentage.
 
 ![](../03 Visualizations/Barchart_Calc.png)
 
