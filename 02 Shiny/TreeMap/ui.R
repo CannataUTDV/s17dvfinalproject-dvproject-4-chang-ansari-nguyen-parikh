@@ -15,7 +15,13 @@ dashboardPage(
     tabItems(
       # First tab content
       tabItem(tabName = "Treemap",
-              plotOutput("plot1")
+              plotOutput("plot1",
+              click = "plot_click",
+              dblclick = "plot_dblclick",
+              hover = "plot_hover",
+              brush = "plot_brush"
+      ),
+      plotOutput("plot2")
       )
     )
   )
