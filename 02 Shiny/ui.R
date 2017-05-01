@@ -2,6 +2,7 @@
 
 require(shiny)
 require(shinydashboard)
+require(plotly)
 
 dashboardPage(
   dashboardHeader(
