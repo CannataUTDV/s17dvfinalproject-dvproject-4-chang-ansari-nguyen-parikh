@@ -28,5 +28,12 @@ server <- function(input, output) {
             palette = "Greens",
             title = "Total Discharges per State")
   })
-
+  output$plot2 <- renderPlot({
+    brush = brushOpts(id="plot_brush", delayType = "throttle", delay = 30)
+    bdf=brushedPoints(data, input$plot_brush, xvar = "State", yvar = "Total_Discharges")
+    if( !is.null(input$plot_brush) ) {
+      data = data %>% dplyr::filter(State %in% bdf$State)
+      data %>% ggplot() + geom_histogram(aes(x=Total_Discharges))
+    }
+  })
 }
