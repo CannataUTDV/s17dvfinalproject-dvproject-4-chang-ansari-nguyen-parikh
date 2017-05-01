@@ -27,7 +27,7 @@ We joined our healthcare.csv with the census data keyed on states using Tableau.
 
 
 #**Graph 1**
-This first visual is a crosstab which joins 3 different datasets related to healchare throughout the US. The crosstab shows the cost per discharge in the 5 least insured states within the US. It includes different sets to organize the data as well as a KPI of cost per discharge with three different parameters: high, medium, and low.
+This first visual is a crosstab which joins all 3 of our datasets (which are related to healchare) throughout the US. The crosstab shows the cost per discharge in the 5 least insured states. It includes different sets to organize the data as well as a KPI of cost per discharge with three different parameters: high, medium, and low.
 
 ![](../03 Visualizations/CrosstabViz.png)
 
@@ -67,5 +67,11 @@ Here is the Shiny link: https://traj30.shinyapps.io/graph3/
 This scatter joins all 3 of our datasets: Poverty.csv, USA_All_States.csv, and healthcare.csv and shows the how the percentage of poverty as a function of percentage of people insured per state. Here we see a general trend that explains that as percentage of people insured per state increases, the percentage of poverty decreases. In other words, these two variables are negatively correlated.
 
 ![](../03 Visualizations/Scatter.png)
+
+
+#**Graph 6**
+This map joins Poverty.csv and healthcare.csv. A KPI was created which creates a ratio of the number of youth (18-24) below the poverty line over the total number of people below poverty line. When certain states are chosen, an action will open up a bar chart which will compare that KPI between different states. 
+
+![](../03 Visualizations/Map.png)
 
 
