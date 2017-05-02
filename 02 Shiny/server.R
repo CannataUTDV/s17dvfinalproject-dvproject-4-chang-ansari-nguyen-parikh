@@ -10,6 +10,7 @@ require(tidyr)
 require(plotly)
 require(treemap)
 require(stringr)
+require(DT)
 
 online5 = "SQL"
 online1 = "SQL"
