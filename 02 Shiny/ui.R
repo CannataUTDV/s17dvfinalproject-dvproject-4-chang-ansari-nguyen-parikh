@@ -63,7 +63,7 @@ dashboardPage(
     )
     ),
     tabItem(tabName = 'scatter',tabsetPanel(
-                 tabPanel("Scatterplot", plotOutput("scatter"))              
+                 tabPanel("Scatterplot", "Regression line is y=0.41-0.189x. The r^2 is 0.06518 and the RSME is 0.046.",plotOutput("scatter"))              
       )),
     tabItem(tabName = "idset",
             plotOutput("action1",

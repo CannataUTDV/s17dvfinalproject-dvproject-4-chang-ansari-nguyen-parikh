@@ -15,6 +15,15 @@ require(DT)
 online5 = "SQL"
 online1 = "SQL"
 
+lm_eqn <- function(x,y){
+  m <- lm(y ~ x);
+  eq <- substitute(italic(y) == a + b %.% italic(x)*","~~italic(r)^2~"="~r2, 
+                   list(a = format(coef(m)[1], digits = 2), 
+                        b = format(coef(m)[2], digits = 2), 
+                        r2 = format(summary(m)$r.squared, digits = 3)))
+  as.character(as.expression(eq));                 
+}
+
 #for scatter
 data4 = query(
   data.world(propsfile = "www/.data.world"),
@@ -38,9 +47,9 @@ data4 = query(
 data4 = data4 %>% dplyr::mutate(InsurancePerc = (Insured_Males + Insured_Females)/(Insured_Males + Insured_Females + Noninsured_Males + Noninsured_Females))
 data4 = data4 %>% dplyr::mutate(PovertyPerc = (Male_Poverty + Female_Poverty)/(Male_Poverty + Female_Poverty + Male_Above + Female_Above))
 
-x=data4[,10]
-y=data4[,11]
-r2 <- paste((cor(x,y)))
+x=ts(data4[,10])
+y=ts(data4[,11])
+correl = lm(y~x)
 
 #For Bar Chart
 data = query(
@@ -121,7 +130,7 @@ server <- function(input, output) {
                                                  region_list5, multiple = TRUE, selected='All') })
   #Barchart
   output$plot1 <- renderPlot(height =1000, {
-    ggplot(data, aes(x=State,y=InsuranceRate,fill=discharges))+ 
+    ggplot(data, aes(x=reorder(State, -InsuranceRate),y=InsuranceRate,fill=discharges))+ 
       scale_y_continuous()+
       theme(axis.text.x=element_text(angle=0, size=12, vjust=0.5)) + 
       theme(axis.text.y=element_text(size=12, hjust=0.5)) +
