@@ -77,6 +77,10 @@ This map joins Poverty.csv and healthcare.csv. A KPI was created which creates a
 
 ![](../03 Visualizations/Map.png)
 
+Below is the result of the action after selecting some of the mountain states:
+![](../03 Visualizations/mapbarchart.png)
+
+
 
 #**Graph 7: BoxPlot**
 This boxplot shows the average and quartile information for average medicare payment in each state. The color is keyed by insurance rate and the sorted from left to right.  This is interesting in that it looks like the states with the highest median payment also tend to have the highest insurance rates.

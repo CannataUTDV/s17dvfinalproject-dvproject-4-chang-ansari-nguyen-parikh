@@ -38,6 +38,9 @@ data4 = query(
 data4 = data4 %>% dplyr::mutate(InsurancePerc = (Insured_Males + Insured_Females)/(Insured_Males + Insured_Females + Noninsured_Males + Noninsured_Females))
 data4 = data4 %>% dplyr::mutate(PovertyPerc = (Male_Poverty + Female_Poverty)/(Male_Poverty + Female_Poverty + Male_Above + Female_Above))
 
+x=data4[,10]
+y=data4[,11]
+r2 <- paste((cor(x,y)))
 
 #For Bar Chart
 data = query(
@@ -142,14 +145,14 @@ server <- function(input, output) {
     else region_list5 <- append(list("Skip" = "Skip"), input$selectedBoxplotRegions)
     if(online5 == "SQL") {
       print("Getting from data.world")
-      df <- query(
+      df = query(
         data.world(propsfile = "www/.data.world"),
         dataset="jackchang/s-17-dv-final-project", type="sql",
         query="select USA_All_States.State as State, USA_All_States.`Females 18-25 with Insurance` as F_I, USA_All_States.`Females 18-25 without insurance` as F_N, healthcare.`DRG Definition` as Procedure,
-          USA_All_States.`Insured Males 18-25` as M_I, USA_All_States.`Noninsured Males 18-25` as M_N, healthcare.`Total Discharges` AS discharges
-          from USA_All_States join healthcare 
-          on USA_All_States.State = healthcare.`Provider State`
-          where ? = 'All' or State in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          USA_All_States.`Insured Males 18-25` as M_I, USA_All_States.`Noninsured Males 18-25` as M_N, `healthcare.csv/healthcare`.`Average Medicare Payments` AS avgmedpayments
+        from USA_All_States join healthcare 
+        on USA_All_States.State = healthcare.`Provider State`
+        where ? = 'All' or State in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           ",
         queryParameters = region_list5) # %>% View()
     }
@@ -161,8 +164,8 @@ server <- function(input, output) {
   
   output$boxplotPlot1 <- renderPlotly({
     p <- ggplot(dfbp1()) + 
-      geom_boxplot(aes(x=State, y=discharges, color=(F_I+M_I)/(F_I+F_N+M_I+M_N))) +
-      theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5)) + labs(color="Insurance Rate", title="Insurance Rate versus Discharges by State")
+      geom_boxplot(aes(x=reorder(State, -avgmedpayments, FUN=median), y=avgmedpayments, color=(F_I+M_I)/(F_I+F_N+M_I+M_N))) +
+      theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5)) + labs(color="Insurance Rate", title="Insurance Rate versus Average Medicare Payments by State", x="State")
     ggplotly(p)})
   
   #TREE MAP
@@ -209,7 +212,7 @@ server <- function(input, output) {
     
   #SCATTER
     output$scatter <- renderPlot({
-      ggplot() + geom_point(data=data4, (aes(x=InsurancePerc, y=PovertyPerc, color=State))) + geom_smooth(data=data4, aes(x=InsurancePerc, y=PovertyPerc), se=FALSE, method=lm) + scale_x_continuous(limits = c(.5, 1.05)) + scale_y_continuous(limits = c(0,.38))+labs(title="Correlation between insurance rate and poverty")
+      ggplot(data=data4, aes(x=InsurancePerc, y=PovertyPerc)) + geom_point(data=data4, (aes(x=InsurancePerc, y=PovertyPerc, color=State))) + geom_smooth(data=data4, aes(x=InsurancePerc, y=PovertyPerc), se=FALSE, method=lm) + scale_x_continuous(limits = c(.5, 1.05)) + scale_y_continuous(limits = c(0,.38)) + labs(title="Correlation Between Insurance Rate and Poverty")
   })
     
   #ID Set Actions
